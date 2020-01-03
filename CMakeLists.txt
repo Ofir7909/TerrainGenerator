@@ -1,12 +1,16 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(TerrainGenerator VERSION 0.1)
+project(terraGen VERSION 0.1)
 
-#set(CMAKE_CXX_STANDARD 14)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O3")
+cmake_policy(SET CMP0072 NEW)
 
 set(SOURCE_FILES
     src/main.cpp
 )
 
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
+add_executable(terraGen ${SOURCE_FILES})
+
+
+#include forge engine.
+add_subdirectory(lib/forge EXCLUDE_FROM_ALL)
+target_link_libraries(terraGen PRIVATE forge)

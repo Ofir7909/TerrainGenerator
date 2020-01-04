@@ -3,16 +3,16 @@
 #include <forge.h>
 
 int main(int argc, char **argv) {
-  // forge::Window window(800, 600, "Hello world");
+  forge::Window window(800, 600, "My Game");
 
-  // while (window.IsOpen()) {
-  //   window.Clear(0.2f, 0.3f, 0.7f, 1.0f);
+  while (window.IsOpen()) {
+    window.Clear(0.2f, 0.3f, 0.7f, 1.0f);
 
-  //   window.Update();
+    window.Update();
 
-  //   window.Draw();
-  // }
+    window.Draw();
+  }
 
-  forge::Example();
+  // forge::Example();
   return 0;
 }

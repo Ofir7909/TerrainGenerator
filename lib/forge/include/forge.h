@@ -6,4 +6,5 @@
 #include "../src/VertexArray.h"
 #include "../src/VertexBuffer.h"
 #include "../src/VertexBufferLayout.h"
+#include "../src/Window.h"
 #include "../src/test.h"

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <assert.h>
 #include <glad/glad.h>
+
+#include <assert.h>
 
 #include "IndexBuffer.h"
 #include "Shader.h"

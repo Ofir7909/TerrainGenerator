@@ -2,10 +2,17 @@
 
 #include <forge.h>
 
-int main(int argc, char** argv)
-{
-    std::cout<< "Hello World" <<std::endl;
-    int errorCode = forge::Example();
+int main(int argc, char **argv) {
+  // forge::Window window(800, 600, "Hello world");
 
-    return errorCode;
+  // while (window.IsOpen()) {
+  //   window.Clear(0.2f, 0.3f, 0.7f, 1.0f);
+
+  //   window.Update();
+
+  //   window.Draw();
+  // }
+
+  forge::Example();
+  return 0;
 }

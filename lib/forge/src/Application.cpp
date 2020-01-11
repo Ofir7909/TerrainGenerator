@@ -1,5 +1,7 @@
 #include "Application.h"
-#include <stdio.h>
+
+#include "Core.h"
+
 namespace forge {
 
 Application::Application() {}

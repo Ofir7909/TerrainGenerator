@@ -3,9 +3,11 @@ cmake_minimum_required(VERSION 3.0)
 project(forge VERSION 0.1)
 
 set(SOURCE_FILES
+    src/Core.h
     src/Application.cpp
     src/Application.h
-    src/Core.h
+    src/Log.cpp
+    src/Log.h
 )
 
 add_library(forge ${SOURCE_FILES})
@@ -37,4 +39,6 @@ target_link_libraries(forge PUBLIC glm)
 add_subdirectory(lib/stb EXCLUDE_FROM_ALL)
 target_link_libraries(forge PUBLIC stb)
 
-
+#spdlog
+add_subdirectory(lib/spdlog EXCLUDE_FROM_ALL)
+target_link_libraries(forge PUBLIC spdlog)

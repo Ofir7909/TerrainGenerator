@@ -14,7 +14,7 @@ set(SOURCE_FILES
 add_library(forge ${SOURCE_FILES})
  
 target_include_directories(forge INTERFACE include)
-target_include_directories(forge INTERFACE src) 
+target_include_directories(forge PUBLIC src) 
 
 # glfw
 set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW example programs")

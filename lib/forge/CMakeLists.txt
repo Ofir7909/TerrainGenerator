@@ -8,11 +8,13 @@ set(SOURCE_FILES
     src/Application.h
     src/Log.cpp
     src/Log.h
+    src/Events/Event.h
 )
 
 add_library(forge ${SOURCE_FILES})
-
-target_include_directories(forge PUBLIC include)
+ 
+target_include_directories(forge INTERFACE include)
+target_include_directories(forge INTERFACE src) 
 
 # glfw
 set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW example programs")

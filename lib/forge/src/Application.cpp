@@ -2,14 +2,14 @@
 
 #include "Core.h"
 
-namespace forge {
-
+namespace forge
+{
 Application::Application() {}
 Application::~Application() {}
 
-void Application::Run() {
-  while (true) {
-  }
+void Application::Run()
+{
+	while (true) {}
 }
 
 } // namespace forge

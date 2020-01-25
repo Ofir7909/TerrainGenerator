@@ -1,16 +1,18 @@
 #pragma once
-namespace forge {
 
-class Application {
-public:
-  Application();
-  virtual ~Application();
+namespace forge
+{
+class Application
+{
+  public:
+	Application();
+	virtual ~Application();
 
-  void Run();
+	void Run();
 
-private:
+  private:
 };
 
-Application *CreateApplication();
+Application* CreateApplication();
 
 } // namespace forge

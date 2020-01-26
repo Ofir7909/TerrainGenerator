@@ -1,11 +1,5 @@
 #pragma once
 
-#include <functional>
-#include <iostream>
-#include <memory>
-#include <sstream>
-#include <stdio.h>
-#include <string>
-
+#include "frgpch.h"
 
 #define BIT(x) (1 << x)

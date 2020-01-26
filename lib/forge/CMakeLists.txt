@@ -1,20 +1,26 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.16)
 
 project(forge VERSION 0.1)
 
 set(SOURCE_FILES
-    src/Core.h
     src/Application.cpp
-    src/Application.h
     src/Log.cpp
+)
+
+set(HEADER_FILES
+	src/Core.h
     src/Log.h
-    src/Events/Event.h
+    src/Application.h
+	src/Events/Event.h
 )
 
 add_library(forge ${SOURCE_FILES})
  
 target_include_directories(forge INTERFACE include)
 target_include_directories(forge PUBLIC src) 
+
+# Precompiled header
+target_precompile_headers(forge PUBLIC src/frgpch.h)
 
 # glfw
 set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW example programs")

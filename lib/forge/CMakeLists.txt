@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.16)
 
 project(forge VERSION 0.1)
 
+#Tell Cmake to use modern OpenGL
+cmake_policy(SET CMP0072 NEW)
+
 set(SOURCE_FILES
     src/Application.cpp
     src/Log.cpp

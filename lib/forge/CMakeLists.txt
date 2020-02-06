@@ -7,7 +7,8 @@ cmake_policy(SET CMP0072 NEW)
 
 set(SOURCE_FILES
     src/Application.cpp
-    src/Log.cpp
+	src/Log.cpp
+	src/Platform/x11/Window_x11.cpp
 )
 
 set(HEADER_FILES
@@ -24,6 +25,10 @@ target_include_directories(forge PUBLIC src)
 
 # Precompiled header
 target_precompile_headers(forge PUBLIC src/frgpch.h)
+
+# might be removed after adding proper support for glad
+find_package(OpenGL REQUIRED)
+target_link_libraries(forge PUBLIC OpenGL::GL)
 
 # glfw
 set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW example programs")

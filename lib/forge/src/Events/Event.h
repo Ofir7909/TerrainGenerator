@@ -67,7 +67,7 @@ class Event
 
 class EventDispatcher
 {
-	// EventFn type decleration
+	// EventFn type decleration, T must inherite the event class.
 	template< typename T >
 	using EventFn = std::function< bool(T&) >;
 

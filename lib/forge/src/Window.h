@@ -18,6 +18,8 @@ struct WindowProps
 	{
 	}
 };
+
+//Interface representing a desktop window.
 class Window
 {
   public:

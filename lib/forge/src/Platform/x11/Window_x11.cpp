@@ -139,7 +139,4 @@ void Window_x11::SetVsync(bool enabled)
 
 	m_Data.Vsync = enabled;
 }
-
-
-
 } // namespace forge

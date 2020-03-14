@@ -53,10 +53,10 @@ class Event
 {
 	friend class EventDispatcher;
 
-  protected:
-	bool m_Handled = false;
 
   public:
+	bool m_Handled = false;
+
 	virtual EventType GetEventType() const = 0;
 	virtual const char* GetName() const	   = 0;
 	virtual int GetCategoryFlags() const   = 0;
@@ -68,6 +68,8 @@ class Event
 class EventDispatcher
 {
 	// EventFn type decleration, T must inherite the event class.
+	// EventFn is a function that returns a bool(for isHandled).
+	// and takes an Event refrence as argument(T)
 	template< typename T >
 	using EventFn = std::function< bool(T&) >;
 
@@ -82,7 +84,7 @@ class EventDispatcher
 	bool Dispatch(EventFn< T > func)
 	{
 		if (m_Event.GetEventType() == T::GetStaticType()) {
-			// Take m_Event location, convert it to T pointer, and derefrence it.
+			// Call the handeling function.
 			m_Event.m_Handled = func(*(T*)&m_Event);
 			return true;
 		}

@@ -9,6 +9,8 @@ set(SOURCE_FILES
     src/Application.cpp
 	src/Log.cpp
 	src/Platform/x11/Window_x11.cpp
+	src/Layer.cpp
+	src/LayerStack.cpp
 )
 
 set(HEADER_FILES

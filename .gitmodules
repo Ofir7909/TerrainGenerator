@@ -10,3 +10,7 @@
 [submodule "lib/forge/lib/spdlog"]
 	path = lib/forge/lib/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "lib/forge/lib/imgui"]
+	path = lib/forge/lib/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking

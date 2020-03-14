@@ -27,18 +27,27 @@ void Window_x11::Init(const WindowProps& props)
 
 	FRG_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
+	// Init GLFW
 	if (!s_GLFWInitialized) {
+		FRG_CORE_INFO("Initializing GLFW");
 		int success = glfwInit();
 		FRG_CORE_ASSERT(success, "Could not Initialize GLFW");
 
 		glfwSetErrorCallback(GLFWErrorCallback);
 
 		s_GLFWInitialized = true;
+		FRG_CORE_INFO("GLFW initialized successfully");
 	}
 
 	m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(),
 								nullptr, nullptr);
 	glfwMakeContextCurrent(m_Window);
+
+	// Init GLAD
+	FRG_CORE_INFO("Initializing GLAD");
+	int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+	FRG_CORE_ASSERT(status, "Failed to initialize GLAD");
+
 	glfwSetWindowUserPointer(m_Window, &m_Data);
 	SetVsync(true);
 

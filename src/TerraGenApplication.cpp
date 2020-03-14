@@ -11,7 +11,11 @@ class ExampleLayer : public forge::Layer
 class TerraGenApplication : public forge::Application
 {
   public:
-	TerraGenApplication() { PushLayer(new ExampleLayer()); }
+	TerraGenApplication()
+	{
+		PushLayer(new ExampleLayer());
+		PushOverlay(new forge::ImGuiLayer());
+	}
 	~TerraGenApplication() {}
 };
 

@@ -20,6 +20,10 @@ class Application
 	void PushLayer(Layer* layer);
 	void PushOverlay(Layer* layer);
 
+	inline const Window& GetWindow() { return *m_Window; }
+
+	inline static Application& Get() { return *s_Instance; }
+
   private:
 	bool OnWindowClose(WindowCloseEvent& e);
 
@@ -27,6 +31,8 @@ class Application
 	std::unique_ptr< Window > m_Window;
 	bool m_Running = true;
 	LayerStack m_LayerStack;
+
+	static Application* s_Instance;
 };
 
 // Defind in client

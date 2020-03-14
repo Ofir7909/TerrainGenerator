@@ -9,8 +9,10 @@ set(SOURCE_FILES
     src/Application.cpp
 	src/Log.cpp
 	src/Platform/x11/Window_x11.cpp
+	src/Platform/OpenGL/ImGuiRenderer_GL.cpp
 	src/Layer.cpp
 	src/LayerStack.cpp
+	src/ImGui/ImGuiLayer.cpp
 )
 
 set(HEADER_FILES
@@ -44,8 +46,8 @@ target_link_libraries(forge PUBLIC glfw)
 #glad
 add_subdirectory(lib/glad EXCLUDE_FROM_ALL)
 # add_library("glad" "${GLAD_DIR}/src/glad.c")
-# target_include_directories("glad" PRIVATE "${GLAD_DIR}/include")
-#target_include_directories(forge PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/lib/glad/include")
+#target_include_directories("glad" PRIVATE "${GLAD_DIR}/include")
+target_include_directories(forge PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/lib/glad/include")
 #message("[-]Added include Directory ${CMAKE_CURRENT_BINARY_DIR}/lib/glad/include")
 target_link_libraries(forge PUBLIC glad)
 
@@ -56,6 +58,10 @@ target_link_libraries(forge PUBLIC glm)
 #stb_image
 add_subdirectory(lib/stb EXCLUDE_FROM_ALL)
 target_link_libraries(forge PUBLIC stb)
+
+#imgui
+add_subdirectory(lib/imgui EXCLUDE_FROM_ALL)
+target_link_libraries(forge PUBLIC imgui)
 
 #spdlog
 add_subdirectory(lib/spdlog EXCLUDE_FROM_ALL)

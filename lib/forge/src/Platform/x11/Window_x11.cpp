@@ -58,7 +58,7 @@ void Window_x11::Init(const WindowProps& props)
 		data.Width	= width;
 		data.Height = height;
 
-		WindowResizeEvent event(width, height);
+		WindowResizedEvent event(width, height);
 		data.EventCallback(event);
 	});
 

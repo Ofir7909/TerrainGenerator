@@ -4,13 +4,13 @@
 
 namespace forge
 {
-class WindowResizeEvent : public Event
+class WindowResizedEvent : public Event
 {
   private:
 	unsigned int m_Width, m_Height;
 
   public:
-	WindowResizeEvent(unsigned int width, unsigned int height): m_Width(width), m_Height(height) {}
+	WindowResizedEvent(unsigned int width, unsigned int height): m_Width(width), m_Height(height) {}
 
 	inline unsigned int GetWidth() const { return m_Width; }
 	inline unsigned int GetHeight() const { return m_Height; }

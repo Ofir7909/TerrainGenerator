@@ -22,7 +22,7 @@ class WindowResizedEvent : public Event
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(WindowResize)
+	EVENT_CLASS_TYPE(WindowResized)
 	EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 

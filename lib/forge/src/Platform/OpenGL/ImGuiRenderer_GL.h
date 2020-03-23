@@ -28,6 +28,8 @@
 #pragma once
 
 #include "imgui.h"
+#include <glad/glad.h>
+
 
 // Backend API
 IMGUI_IMPL_API bool ImGui_ImplOpenGL3_Init(const char* glsl_version = NULL);

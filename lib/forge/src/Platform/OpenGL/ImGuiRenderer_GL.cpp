@@ -79,7 +79,7 @@
 
 #include "ImGuiRenderer_GL.h"
 #include "Core.h"
-#include "glad/glad.h"
+#include <glad/glad.h>
 #include <stdio.h>
 #if defined(_MSC_VER) && _MSC_VER <= 1500 // MSVC 2008 or earlier
 #include <stddef.h>						  // intptr_t
@@ -129,11 +129,9 @@
 #endif
 
 // OpenGL Data
-static GLuint g_GlVersion =
-	0; // Extracted at runtime using GL_MAJOR_VERSION, GL_MINOR_VERSION queries.
-static char g_GlslVersionString[32] =
-	""; // Specified by user or detected based on compile time GL settings.
-static GLuint g_FontTexture	 = 0;
+static GLuint g_GlVersion			= 0;  // Extracted at runtime using GL_MAJOR_VERSION, GL_MINOR_VERSION queries.
+static char g_GlslVersionString[32] = ""; // Specified by user or detected based on compile time GL settings.
+static GLuint g_FontTexture			= 0;
 static GLuint g_ShaderHandle = 0, g_VertHandle = 0, g_FragHandle = 0;
 static int g_AttribLocationTex = 0, g_AttribLocationProjMtx = 0; // Uniforms location
 static int g_AttribLocationVtxPos = 0, g_AttribLocationVtxUV = 0,
@@ -162,9 +160,8 @@ bool ImGui_ImplOpenGL3_Init(const char* glsl_version)
 	io.BackendRendererName = "imgui_impl_opengl3";
 #if IMGUI_IMPL_OPENGL_MAY_HAVE_VTX_OFFSET
 	if (g_GlVersion >= 3200)
-		io.BackendFlags |=
-			ImGuiBackendFlags_RendererHasVtxOffset; // We can honor the ImDrawCmd::VtxOffset field,
-													// allowing for large meshes.
+		io.BackendFlags |= ImGuiBackendFlags_RendererHasVtxOffset; // We can honor the ImDrawCmd::VtxOffset field,
+																   // allowing for large meshes.
 #endif
 	io.BackendFlags |= ImGuiBackendFlags_RendererHasViewports; // We can create multi-viewports on
 															   // the Renderer side (optional)
@@ -282,8 +279,8 @@ static void ImGui_ImplOpenGL3_SetupRenderState(ImDrawData* draw_data, int fb_wid
 						  (GLvoid*)IM_OFFSETOF(ImDrawVert, pos));
 	glVertexAttribPointer(g_AttribLocationVtxUV, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert),
 						  (GLvoid*)IM_OFFSETOF(ImDrawVert, uv));
-	glVertexAttribPointer(g_AttribLocationVtxColor, 4, GL_UNSIGNED_BYTE, GL_TRUE,
-						  sizeof(ImDrawVert), (GLvoid*)IM_OFFSETOF(ImDrawVert, col));
+	glVertexAttribPointer(g_AttribLocationVtxColor, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ImDrawVert),
+						  (GLvoid*)IM_OFFSETOF(ImDrawVert, col));
 }
 
 // OpenGL3 Render function.
@@ -362,9 +359,8 @@ void ImGui_ImplOpenGL3_RenderDrawData(ImDrawData* draw_data)
 	ImGui_ImplOpenGL3_SetupRenderState(draw_data, fb_width, fb_height, vertex_array_object);
 
 	// Will project scissor/clipping rectangles into framebuffer space
-	ImVec2 clip_off = draw_data->DisplayPos; // (0,0) unless using multi-viewports
-	ImVec2 clip_scale =
-		draw_data->FramebufferScale; // (1,1) unless using retina display which are often (2,2)
+	ImVec2 clip_off	  = draw_data->DisplayPos;		 // (0,0) unless using multi-viewports
+	ImVec2 clip_scale = draw_data->FramebufferScale; // (1,1) unless using retina display which are often (2,2)
 
 	// Render command lists
 	for (int n = 0; n < draw_data->CmdListsCount; n++) {
@@ -373,8 +369,7 @@ void ImGui_ImplOpenGL3_RenderDrawData(ImDrawData* draw_data)
 		// Upload vertex/index buffers
 		glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)cmd_list->VtxBuffer.Size * sizeof(ImDrawVert),
 					 (const GLvoid*)cmd_list->VtxBuffer.Data, GL_STREAM_DRAW);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-					 (GLsizeiptr)cmd_list->IdxBuffer.Size * sizeof(ImDrawIdx),
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)cmd_list->IdxBuffer.Size * sizeof(ImDrawIdx),
 					 (const GLvoid*)cmd_list->IdxBuffer.Data, GL_STREAM_DRAW);
 
 		for (int cmd_i = 0; cmd_i < cmd_list->CmdBuffer.Size; cmd_i++) {
@@ -384,8 +379,7 @@ void ImGui_ImplOpenGL3_RenderDrawData(ImDrawData* draw_data)
 				// (ImDrawCallback_ResetRenderState is a special callback value used by the user to
 				// request the renderer to reset render state.)
 				if (pcmd->UserCallback == ImDrawCallback_ResetRenderState)
-					ImGui_ImplOpenGL3_SetupRenderState(draw_data, fb_width, fb_height,
-													   vertex_array_object);
+					ImGui_ImplOpenGL3_SetupRenderState(draw_data, fb_width, fb_height, vertex_array_object);
 				else
 					pcmd->UserCallback(cmd_list, pcmd);
 			} else {
@@ -396,28 +390,23 @@ void ImGui_ImplOpenGL3_RenderDrawData(ImDrawData* draw_data)
 				clip_rect.z = (pcmd->ClipRect.z - clip_off.x) * clip_scale.x;
 				clip_rect.w = (pcmd->ClipRect.w - clip_off.y) * clip_scale.y;
 
-				if (clip_rect.x < fb_width && clip_rect.y < fb_height && clip_rect.z >= 0.0f &&
-					clip_rect.w >= 0.0f) {
+				if (clip_rect.x < fb_width && clip_rect.y < fb_height && clip_rect.z >= 0.0f && clip_rect.w >= 0.0f) {
 					// Apply scissor/clipping rectangle
 					if (clip_origin_lower_left)
-						glScissor((int)clip_rect.x, (int)(fb_height - clip_rect.w),
-								  (int)(clip_rect.z - clip_rect.x),
+						glScissor((int)clip_rect.x, (int)(fb_height - clip_rect.w), (int)(clip_rect.z - clip_rect.x),
 								  (int)(clip_rect.w - clip_rect.y));
 					else
-						glScissor(
-							(int)clip_rect.x, (int)clip_rect.y, (int)clip_rect.z,
-							(int)clip_rect
-								.w); // Support for GL 4.5 rarely used glClipControl(GL_UPPER_LEFT)
+						glScissor((int)clip_rect.x, (int)clip_rect.y, (int)clip_rect.z,
+								  (int)clip_rect.w); // Support for GL 4.5 rarely used glClipControl(GL_UPPER_LEFT)
 
 					// Bind texture, Draw
 					glBindTexture(GL_TEXTURE_2D, (GLuint)(intptr_t)pcmd->TextureId);
 #if IMGUI_IMPL_OPENGL_MAY_HAVE_VTX_OFFSET
 					if (g_GlVersion >= 3200)
-						glDrawElementsBaseVertex(
-							GL_TRIANGLES, (GLsizei)pcmd->ElemCount,
-							sizeof(ImDrawIdx) == 2 ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT,
-							(void*)(intptr_t)(pcmd->IdxOffset * sizeof(ImDrawIdx)),
-							(GLint)pcmd->VtxOffset);
+						glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)pcmd->ElemCount,
+												 sizeof(ImDrawIdx) == 2 ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT,
+												 (void*)(intptr_t)(pcmd->IdxOffset * sizeof(ImDrawIdx)),
+												 (GLint)pcmd->VtxOffset);
 					else
 #endif
 						glDrawElements(GL_TRIANGLES, (GLsizei)pcmd->ElemCount,
@@ -445,8 +434,7 @@ void ImGui_ImplOpenGL3_RenderDrawData(ImDrawData* draw_data)
 #endif
 	glBindBuffer(GL_ARRAY_BUFFER, last_array_buffer);
 	glBlendEquationSeparate(last_blend_equation_rgb, last_blend_equation_alpha);
-	glBlendFuncSeparate(last_blend_src_rgb, last_blend_dst_rgb, last_blend_src_alpha,
-						last_blend_dst_alpha);
+	glBlendFuncSeparate(last_blend_src_rgb, last_blend_dst_rgb, last_blend_src_alpha, last_blend_dst_alpha);
 	if (last_enable_blend)
 		glEnable(GL_BLEND);
 	else
@@ -466,10 +454,8 @@ void ImGui_ImplOpenGL3_RenderDrawData(ImDrawData* draw_data)
 #ifdef GL_POLYGON_MODE
 	glPolygonMode(GL_FRONT_AND_BACK, (GLenum)last_polygon_mode[0]);
 #endif
-	glViewport(last_viewport[0], last_viewport[1], (GLsizei)last_viewport[2],
-			   (GLsizei)last_viewport[3]);
-	glScissor(last_scissor_box[0], last_scissor_box[1], (GLsizei)last_scissor_box[2],
-			  (GLsizei)last_scissor_box[3]);
+	glViewport(last_viewport[0], last_viewport[1], (GLsizei)last_viewport[2], (GLsizei)last_viewport[3]);
+	glScissor(last_scissor_box[0], last_scissor_box[1], (GLsizei)last_scissor_box[2], (GLsizei)last_scissor_box[3]);
 }
 
 bool ImGui_ImplOpenGL3_CreateFontsTexture()
@@ -524,8 +510,7 @@ static bool CheckShader(GLuint handle, const char* desc)
 	glGetShaderiv(handle, GL_COMPILE_STATUS, &status);
 	glGetShaderiv(handle, GL_INFO_LOG_LENGTH, &log_length);
 	if ((GLboolean)status == GL_FALSE)
-		fprintf(stderr, "ERROR: ImGui_ImplOpenGL3_CreateDeviceObjects: failed to compile %s!\n",
-				desc);
+		fprintf(stderr, "ERROR: ImGui_ImplOpenGL3_CreateDeviceObjects: failed to compile %s!\n", desc);
 	if (log_length > 1) {
 		ImVector< char > buf;
 		buf.resize((int)(log_length + 1));
@@ -543,10 +528,8 @@ static bool CheckProgram(GLuint handle, const char* desc)
 	glGetProgramiv(handle, GL_LINK_STATUS, &status);
 	glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &log_length);
 	if ((GLboolean)status == GL_FALSE)
-		fprintf(
-			stderr,
-			"ERROR: ImGui_ImplOpenGL3_CreateDeviceObjects: failed to link %s! (with GLSL '%s')\n",
-			desc, g_GlslVersionString);
+		fprintf(stderr, "ERROR: ImGui_ImplOpenGL3_CreateDeviceObjects: failed to link %s! (with GLSL '%s')\n", desc,
+				g_GlslVersionString);
 	if (log_length > 1) {
 		ImVector< char > buf;
 		buf.resize((int)(log_length + 1));
@@ -611,62 +594,57 @@ bool ImGui_ImplOpenGL3_CreateDeviceObjects()
 											  "    gl_Position = ProjMtx * vec4(Position.xy,0,1);\n"
 											  "}\n";
 
-	const GLchar* vertex_shader_glsl_410_core =
-		"layout (location = 0) in vec2 Position;\n"
-		"layout (location = 1) in vec2 UV;\n"
-		"layout (location = 2) in vec4 Color;\n"
-		"uniform mat4 ProjMtx;\n"
-		"out vec2 Frag_UV;\n"
-		"out vec4 Frag_Color;\n"
-		"void main()\n"
-		"{\n"
-		"    Frag_UV = UV;\n"
-		"    Frag_Color = Color;\n"
-		"    gl_Position = ProjMtx * vec4(Position.xy,0,1);\n"
-		"}\n";
+	const GLchar* vertex_shader_glsl_410_core = "layout (location = 0) in vec2 Position;\n"
+												"layout (location = 1) in vec2 UV;\n"
+												"layout (location = 2) in vec4 Color;\n"
+												"uniform mat4 ProjMtx;\n"
+												"out vec2 Frag_UV;\n"
+												"out vec4 Frag_Color;\n"
+												"void main()\n"
+												"{\n"
+												"    Frag_UV = UV;\n"
+												"    Frag_Color = Color;\n"
+												"    gl_Position = ProjMtx * vec4(Position.xy,0,1);\n"
+												"}\n";
 
-	const GLchar* fragment_shader_glsl_120 =
-		"#ifdef GL_ES\n"
-		"    precision mediump float;\n"
-		"#endif\n"
-		"uniform sampler2D Texture;\n"
-		"varying vec2 Frag_UV;\n"
-		"varying vec4 Frag_Color;\n"
-		"void main()\n"
-		"{\n"
-		"    gl_FragColor = Frag_Color * texture2D(Texture, Frag_UV.st);\n"
-		"}\n";
+	const GLchar* fragment_shader_glsl_120 = "#ifdef GL_ES\n"
+											 "    precision mediump float;\n"
+											 "#endif\n"
+											 "uniform sampler2D Texture;\n"
+											 "varying vec2 Frag_UV;\n"
+											 "varying vec4 Frag_Color;\n"
+											 "void main()\n"
+											 "{\n"
+											 "    gl_FragColor = Frag_Color * texture2D(Texture, Frag_UV.st);\n"
+											 "}\n";
 
-	const GLchar* fragment_shader_glsl_130 =
-		"uniform sampler2D Texture;\n"
-		"in vec2 Frag_UV;\n"
-		"in vec4 Frag_Color;\n"
-		"out vec4 Out_Color;\n"
-		"void main()\n"
-		"{\n"
-		"    Out_Color = Frag_Color * texture(Texture, Frag_UV.st);\n"
-		"}\n";
+	const GLchar* fragment_shader_glsl_130 = "uniform sampler2D Texture;\n"
+											 "in vec2 Frag_UV;\n"
+											 "in vec4 Frag_Color;\n"
+											 "out vec4 Out_Color;\n"
+											 "void main()\n"
+											 "{\n"
+											 "    Out_Color = Frag_Color * texture(Texture, Frag_UV.st);\n"
+											 "}\n";
 
-	const GLchar* fragment_shader_glsl_300_es =
-		"precision mediump float;\n"
-		"uniform sampler2D Texture;\n"
-		"in vec2 Frag_UV;\n"
-		"in vec4 Frag_Color;\n"
-		"layout (location = 0) out vec4 Out_Color;\n"
-		"void main()\n"
-		"{\n"
-		"    Out_Color = Frag_Color * texture(Texture, Frag_UV.st);\n"
-		"}\n";
+	const GLchar* fragment_shader_glsl_300_es = "precision mediump float;\n"
+												"uniform sampler2D Texture;\n"
+												"in vec2 Frag_UV;\n"
+												"in vec4 Frag_Color;\n"
+												"layout (location = 0) out vec4 Out_Color;\n"
+												"void main()\n"
+												"{\n"
+												"    Out_Color = Frag_Color * texture(Texture, Frag_UV.st);\n"
+												"}\n";
 
-	const GLchar* fragment_shader_glsl_410_core =
-		"in vec2 Frag_UV;\n"
-		"in vec4 Frag_Color;\n"
-		"uniform sampler2D Texture;\n"
-		"layout (location = 0) out vec4 Out_Color;\n"
-		"void main()\n"
-		"{\n"
-		"    Out_Color = Frag_Color * texture(Texture, Frag_UV.st);\n"
-		"}\n";
+	const GLchar* fragment_shader_glsl_410_core = "in vec2 Frag_UV;\n"
+												  "in vec4 Frag_Color;\n"
+												  "uniform sampler2D Texture;\n"
+												  "layout (location = 0) out vec4 Out_Color;\n"
+												  "void main()\n"
+												  "{\n"
+												  "    Out_Color = Frag_Color * texture(Texture, Frag_UV.st);\n"
+												  "}\n";
 
 	// Select shaders matching our GLSL versions
 	const GLchar* vertex_shader	  = NULL;

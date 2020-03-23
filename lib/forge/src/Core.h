@@ -4,6 +4,10 @@
 
 #include <assert.h>
 
+#define FRG_BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+
+#define FRG_BIT(x) (1 << x)
+
 #ifdef FRG_ENABLE_ASSERTS
 
 #define FRG_ASSERT(x, ...)                                   \
@@ -26,5 +30,3 @@
 #define FRG_CORE_ASSERT(x, ...)
 
 #endif
-
-#define BIT(x) (1 << x)

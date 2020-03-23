@@ -39,8 +39,7 @@ void Window_x11::Init(const WindowProps& props)
 		FRG_CORE_INFO("GLFW initialized successfully");
 	}
 
-	m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(),
-								nullptr, nullptr);
+	m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 	glfwMakeContextCurrent(m_Window);
 
 	// Init GLAD
@@ -69,32 +68,38 @@ void Window_x11::Init(const WindowProps& props)
 		data.EventCallback(event);
 	});
 
-	glfwSetKeyCallback(m_Window,
-					   [](GLFWwindow* window, int key, int scancode, int action, int mods) {
-						   WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+	glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-						   switch (action) {
-						   case GLFW_PRESS: {
-							   KeyPressedEvent event(key, 0);
-							   data.EventCallback(event);
-							   break;
-						   }
+		switch (action) {
+		case GLFW_PRESS: {
+			KeyPressedEvent event(key, 0);
+			data.EventCallback(event);
+			break;
+		}
 
-						   case GLFW_RELEASE: {
-							   KeyReleasedEvent event(key);
-							   data.EventCallback(event);
-							   break;
-						   }
+		case GLFW_RELEASE: {
+			KeyReleasedEvent event(key);
+			data.EventCallback(event);
+			break;
+		}
 
-						   case GLFW_REPEAT: {
-							   KeyPressedEvent event(key, 1);
-							   data.EventCallback(event);
-							   break;
-						   }
+		case GLFW_REPEAT: {
+			KeyPressedEvent event(key, 1);
+			data.EventCallback(event);
+			break;
+		}
 
-						   default: break;
-						   }
-					   });
+		default: break;
+		}
+	});
+
+	glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
+		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+		KeyTypedEvent event(keycode);
+		data.EventCallback(event);
+	});
 
 	glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);

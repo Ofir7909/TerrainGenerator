@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(terraGen VERSION 0.1)
 
+add_definitions(-DFRG_ENABLE_ASSERTS)
 
 
 set(SOURCE_FILES

@@ -120,7 +120,6 @@
 #endif
 #endif
 
-
 // Desktop GL 3.2+ has glDrawElementsBaseVertex() which GL ES and WebGL don't have.
 #if defined(IMGUI_IMPL_OPENGL_ES2) || defined(IMGUI_IMPL_OPENGL_ES3) || !defined(GL_VERSION_3_2)
 #define IMGUI_IMPL_OPENGL_MAY_HAVE_VTX_OFFSET 0
@@ -512,7 +511,7 @@ static bool CheckShader(GLuint handle, const char* desc)
 	if ((GLboolean)status == GL_FALSE)
 		fprintf(stderr, "ERROR: ImGui_ImplOpenGL3_CreateDeviceObjects: failed to compile %s!\n", desc);
 	if (log_length > 1) {
-		ImVector< char > buf;
+		ImVector<char> buf;
 		buf.resize((int)(log_length + 1));
 		glGetShaderInfoLog(handle, log_length, NULL, (GLchar*)buf.begin());
 		fprintf(stderr, "%s\n", buf.begin());
@@ -531,7 +530,7 @@ static bool CheckProgram(GLuint handle, const char* desc)
 		fprintf(stderr, "ERROR: ImGui_ImplOpenGL3_CreateDeviceObjects: failed to link %s! (with GLSL '%s')\n", desc,
 				g_GlslVersionString);
 	if (log_length > 1) {
-		ImVector< char > buf;
+		ImVector<char> buf;
 		buf.resize((int)(log_length + 1));
 		glGetProgramInfoLog(handle, log_length, NULL, (GLchar*)buf.begin());
 		fprintf(stderr, "%s\n", buf.begin());
@@ -759,4 +758,7 @@ static void ImGui_ImplOpenGL3_InitPlatformInterface()
 	platform_io.Renderer_RenderWindow = ImGui_ImplOpenGL3_RenderWindow;
 }
 
-static void ImGui_ImplOpenGL3_ShutdownPlatformInterface() { ImGui::DestroyPlatformWindows(); }
+static void ImGui_ImplOpenGL3_ShutdownPlatformInterface()
+{
+	ImGui::DestroyPlatformWindows();
+}

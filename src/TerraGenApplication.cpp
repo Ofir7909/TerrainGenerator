@@ -4,8 +4,8 @@ class ExampleLayer : public forge::Layer
 {
   public:
 	ExampleLayer(): Layer("Example") {}
-	void OnUpdate() override { FRG_INFO("ExampleLayer::Update"); }
-	void OnEvent(forge::Event& event) override { FRG_INFO("{0}", event); }
+	inline void OnUpdate() override { FRG_INFO("ExampleLayer::Update"); }
+	inline void OnEvent(forge::Event& event) override { FRG_INFO("{0}", event); }
 };
 
 class TerraGenApplication : public forge::Application
@@ -16,7 +16,11 @@ class TerraGenApplication : public forge::Application
 		PushLayer(new ExampleLayer());
 		PushOverlay(new forge::ImGuiLayer());
 	}
-	~TerraGenApplication() {}
+
+	~TerraGenApplication() override {}
 };
 
-forge::Application* forge::CreateApplication() { return new TerraGenApplication(); }
+forge::Application* forge::CreateApplication()
+{
+	return new TerraGenApplication();
+}

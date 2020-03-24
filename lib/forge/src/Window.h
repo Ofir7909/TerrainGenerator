@@ -21,7 +21,7 @@ struct WindowProps
 class Window
 {
   public:
-	using EventCallbackFn = std::function< void(Event&) >;
+	using EventCallbackFn = std::function<void(Event&)>;
 
 	virtual ~Window() {}
 
@@ -36,7 +36,6 @@ class Window
 
 	virtual void SetVsync(bool enabled) = 0;
 	virtual bool IsVsync() const		= 0;
-
 
 	static Window* Create(const WindowProps& props = WindowProps());
 };

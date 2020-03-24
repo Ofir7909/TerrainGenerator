@@ -1,21 +1,26 @@
 #include "ImGuiLayer.h"
-#include "Application.h"
 
+#include "Application.h"
 #include "Platform/OpenGL/ImGuiRenderer_GL.h"
 
 // REMOVE THIS
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
-
+#include <imgui.h>
 
 namespace forge
 {
-ImGuiLayer::ImGuiLayer(): Layer("ImGuiLayer") {}
+ImGuiLayer::ImGuiLayer(): Layer("ImGuiLayer")
+{
+}
 
-ImGuiLayer::~ImGuiLayer() {}
+ImGuiLayer::~ImGuiLayer()
+{
+}
 
 void ImGuiLayer::OnAttach()
 {
+	//#setup
 	ImGui::CreateContext();
 	ImGui::StyleColorsDark();
 
@@ -51,7 +56,9 @@ void ImGuiLayer::OnAttach()
 	ImGui_ImplOpenGL3_Init("#version 410");
 }
 
-void ImGuiLayer::OnDetach() {}
+void ImGuiLayer::OnDetach()
+{
+}
 
 void ImGuiLayer::OnUpdate()
 {
@@ -75,14 +82,14 @@ void ImGuiLayer::OnUpdate()
 void ImGuiLayer::OnEvent(Event& event)
 {
 	EventDispatcher dispatcher(event);
-	dispatcher.Dispatch< MouseButtonPressedEvent >(FRG_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
-	dispatcher.Dispatch< MouseButtonReleasedEvent >(FRG_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
-	dispatcher.Dispatch< MouseMovedEvent >(FRG_BIND_EVENT_FN(ImGuiLayer::OnMouseMovedEvent));
-	dispatcher.Dispatch< MouseScrolledEvent >(FRG_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
-	dispatcher.Dispatch< KeyPressedEvent >(FRG_BIND_EVENT_FN(ImGuiLayer::OnKeyPressedEvent));
-	dispatcher.Dispatch< KeyReleasedEvent >(FRG_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
-	dispatcher.Dispatch< KeyTypedEvent >(FRG_BIND_EVENT_FN(ImGuiLayer::OnKeyTypedEvent));
-	dispatcher.Dispatch< WindowResizedEvent >(FRG_BIND_EVENT_FN(ImGuiLayer::OnWindowResizedEvent));
+	dispatcher.Dispatch<MouseButtonPressedEvent>(FRG_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
+	dispatcher.Dispatch<MouseButtonReleasedEvent>(FRG_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
+	dispatcher.Dispatch<MouseMovedEvent>(FRG_BIND_EVENT_FN(ImGuiLayer::OnMouseMovedEvent));
+	dispatcher.Dispatch<MouseScrolledEvent>(FRG_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
+	dispatcher.Dispatch<KeyPressedEvent>(FRG_BIND_EVENT_FN(ImGuiLayer::OnKeyPressedEvent));
+	dispatcher.Dispatch<KeyReleasedEvent>(FRG_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
+	dispatcher.Dispatch<KeyTypedEvent>(FRG_BIND_EVENT_FN(ImGuiLayer::OnKeyTypedEvent));
+	dispatcher.Dispatch<WindowResizedEvent>(FRG_BIND_EVENT_FN(ImGuiLayer::OnWindowResizedEvent));
 }
 
 bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)

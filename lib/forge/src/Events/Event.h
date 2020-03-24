@@ -54,7 +54,6 @@ class Event
 {
 	friend class EventDispatcher;
 
-
   public:
 	bool m_Handled = false;
 
@@ -71,8 +70,8 @@ class EventDispatcher
 	// EventFn type decleration, T must inherite the event class.
 	// EventFn is a function that returns a bool(for isHandled).
 	// and takes an Event refrence as argument(T)
-	template< typename T >
-	using EventFn = std::function< bool(T&) >;
+	template<typename T>
+	using EventFn = std::function<bool(T&)>;
 
   private:
 	Event& m_Event;
@@ -81,8 +80,8 @@ class EventDispatcher
 	EventDispatcher(Event& event): m_Event(event) {}
 
 	// func is the handeling function, T is the type of event we are sending
-	template< typename T >
-	bool Dispatch(EventFn< T > func)
+	template<typename T>
+	bool Dispatch(EventFn<T> func)
 	{
 		if (m_Event.GetEventType() == T::GetStaticType()) {
 			// Call the handeling function.
@@ -93,5 +92,8 @@ class EventDispatcher
 	}
 };
 
-inline std::ostream& operator<<(std::ostream& os, const Event& e) { return os << e.ToString(); }
+inline std::ostream& operator<<(std::ostream& os, const Event& e)
+{
+	return os << e.ToString();
+}
 } // namespace forge

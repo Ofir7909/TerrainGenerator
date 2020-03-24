@@ -18,7 +18,7 @@ class Window_x11 : public Window
 
 	void OnUpdate() override;
 
-	inline virtual void* GetNativeWindow() const override { return m_Window; }
+	inline void* GetNativeWindow() const override { return m_Window; }
 
 	inline unsigned int GetWidth() const override { return m_Data.Width; }
 	inline unsigned int GetHeight() const override { return m_Data.Height; }
@@ -29,8 +29,8 @@ class Window_x11 : public Window
 	inline bool IsVsync() const override { return m_Data.Vsync; }
 
   private:
-	virtual void Init(const WindowProps& props);
-	virtual void Shutdown();
+	void Init(const WindowProps& props);
+	void Shutdown();
 
 	GLFWwindow* m_Window;
 

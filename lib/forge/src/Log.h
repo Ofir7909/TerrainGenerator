@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Core.h"
-#include "spdlog/fmt/ostr.h"
-#include "spdlog/spdlog.h"
+
+#include <spdlog/fmt/ostr.h>
+#include <spdlog/spdlog.h>
 
 namespace forge
 {
@@ -11,13 +12,13 @@ class Log
   public:
 	static void Init();
 
-	static inline std::shared_ptr< spdlog::logger >& GetCoreLogger() { return s_CoreLogger; }
+	static inline std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 
-	static inline std::shared_ptr< spdlog::logger >& GetClientLogger() { return s_ClientLogger; }
+	static inline std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
   private:
-	static std::shared_ptr< spdlog::logger > s_CoreLogger;
-	static std::shared_ptr< spdlog::logger > s_ClientLogger;
+	static std::shared_ptr<spdlog::logger> s_CoreLogger;
+	static std::shared_ptr<spdlog::logger> s_ClientLogger;
 };
 } // namespace forge
 

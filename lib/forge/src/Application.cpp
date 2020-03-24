@@ -1,6 +1,5 @@
 #include "Application.h"
 
-#include "Core.h"
 #include "Input.h"
 
 #include <GLFW/glfw3.h> //REMOVE THIS
@@ -13,10 +12,12 @@ Application::Application()
 	FRG_CORE_ASSERT(!s_Instance, "Application already exist!");
 	s_Instance = this;
 
-	m_Window = std::unique_ptr< Window >(Window::Create());
+	m_Window = std::unique_ptr<Window>(Window::Create());
 	m_Window->SetEventCallback(FRG_BIND_EVENT_FN(Application::OnEvent));
 }
-Application::~Application() {}
+Application::~Application()
+{
+}
 
 void Application::Run()
 {
@@ -27,7 +28,6 @@ void Application::Run()
 		for (Layer* layer : m_LayerStack) { layer->OnUpdate(); }
 
 		auto [x, y] = Input::GetMousePosition();
-		// FRG_CORE_TRACE("{0}, {1}", Input::GetMouseX(), Input::GetMouseY());
 		FRG_CORE_TRACE("{0}, {1}", x, y);
 		FRG_CORE_TRACE("A: {0}", Input::IsKeyPressed(GLFW_KEY_A));
 
@@ -40,7 +40,7 @@ void Application::OnEvent(Event& e)
 	EventDispatcher dispatcher(e);
 
 	// If the event is a WindowCloseEvent Close the window
-	dispatcher.Dispatch< WindowCloseEvent >(FRG_BIND_EVENT_FN(Application::OnWindowClose));
+	dispatcher.Dispatch<WindowCloseEvent>(FRG_BIND_EVENT_FN(Application::OnWindowClose));
 
 	FRG_CORE_TRACE("{0}", e);
 
@@ -70,6 +70,4 @@ bool Application::OnWindowClose(WindowCloseEvent& e)
 	m_Running = false;
 	return true;
 }
-
-
 } // namespace forge

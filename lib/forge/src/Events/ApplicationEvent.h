@@ -35,5 +35,4 @@ class WindowCloseEvent : public Event
 	EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-
 } // namespace forge

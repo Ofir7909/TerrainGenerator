@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Events/ApplicationEvent.h"
-#include "Events/Event.h"
-#include "Layer.h"
 #include "LayerStack.h"
 #include "Window.h"
 
@@ -27,8 +25,7 @@ class Application
   private:
 	bool OnWindowClose(WindowCloseEvent& e);
 
-
-	std::unique_ptr< Window > m_Window;
+	std::unique_ptr<Window> m_Window;
 	bool m_Running = true;
 	LayerStack m_LayerStack;
 

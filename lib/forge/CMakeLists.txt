@@ -9,7 +9,6 @@ cmake_policy(SET CMP0072 NEW)
 set(SOURCE_FILES
     src/Application.cpp
 	src/Log.cpp
-	src/Layer.cpp
 	src/LayerStack.cpp
 	src/ImGui/ImGuiLayer.cpp
 )

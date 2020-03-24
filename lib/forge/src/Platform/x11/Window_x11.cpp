@@ -13,11 +13,20 @@ static void GLFWErrorCallback(int error, const char* description)
 	FRG_CORE_ERROR("GLFW EROOR ({0}): {1}", error, description);
 }
 
-Window* Window::Create(const WindowProps& props) { return new Window_x11(props); }
+Window* Window::Create(const WindowProps& props)
+{
+	return new Window_x11(props);
+}
 
-Window_x11::Window_x11(const WindowProps& props) { Init(props); }
+Window_x11::Window_x11(const WindowProps& props)
+{
+	Init(props);
+}
 
-Window_x11::~Window_x11() { Shutdown(); }
+Window_x11::~Window_x11()
+{
+	Shutdown();
+}
 
 void Window_x11::Init(const WindowProps& props)
 {
@@ -136,7 +145,10 @@ void Window_x11::Init(const WindowProps& props)
 	});
 } // namespace forge
 
-void Window_x11::Shutdown() { glfwDestroyWindow(m_Window); }
+void Window_x11::Shutdown()
+{
+	glfwDestroyWindow(m_Window);
+}
 
 void Window_x11::OnUpdate()
 {

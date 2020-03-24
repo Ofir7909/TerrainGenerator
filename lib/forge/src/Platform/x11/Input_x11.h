@@ -1,17 +1,17 @@
 #pragma once
 
-#include <Input.h>
+#include "Input.h"
 
 namespace forge
 {
 class Input_x11 : public Input
 {
   protected:
-	virtual bool IsKeyPressedImpl(int keycode) override;
+	bool IsKeyPressedImpl(int keycode) override;
 
-	virtual bool IsMouseButonPressedImpl(int button) override;
-	virtual std::pair< float, float > GetMousePositionImpl() override;
-	virtual float GetMouseXImpl() override;
-	virtual float GetMouseYImpl() override;
+	bool IsMouseButonPressedImpl(int button) override;
+	std::pair<float, float> GetMousePositionImpl() override;
+	float GetMouseXImpl() override;
+	float GetMouseYImpl() override;
 };
 } // namespace forge

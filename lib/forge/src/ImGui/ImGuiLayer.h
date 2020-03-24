@@ -1,12 +1,11 @@
 #pragma once
 
 #include "Core.h"
-#include "Layer.h"
-#include "imgui.h"
 
 #include "Events/ApplicationEvent.h"
 #include "Events/KeyEvent.h";
 #include "Events/MouseEvent.h"
+#include "Layer.h"
 
 namespace forge
 {
@@ -34,6 +33,6 @@ class ImGuiLayer : public Layer
 	bool OnWindowResizedEvent(WindowResizedEvent& e);
 
   private:
-	float m_Time = 0;
+	float m_Time = 0; // Temp until we have time class
 };
 } // namespace forge

@@ -2,16 +2,25 @@
 
 namespace forge
 {
-LayerStack::LayerStack() { m_LayerInsert = this->begin(); }
+LayerStack::LayerStack()
+{
+	m_LayerInsert = this->begin();
+}
 
 LayerStack::~LayerStack()
 {
 	for (Layer* layer : m_Layers) delete layer;
 }
 
-void LayerStack::PushLayer(Layer* layer) { m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer); }
+void LayerStack::PushLayer(Layer* layer)
+{
+	m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
+}
 
-void LayerStack::PushOverlay(Layer* layer) { m_Layers.emplace_back(layer); }
+void LayerStack::PushOverlay(Layer* layer)
+{
+	m_Layers.emplace_back(layer);
+}
 
 void LayerStack::PopLayer(Layer* layer)
 {

@@ -5,27 +5,32 @@ project(forge VERSION 0.1)
 #Tell Cmake to use modern OpenGL
 cmake_policy(SET CMP0072 NEW)
 
+
 set(SOURCE_FILES
     src/Application.cpp
 	src/Log.cpp
-	src/Platform/x11/Window_x11.cpp
-	src/Platform/OpenGL/ImGuiRenderer_GL.cpp
 	src/Layer.cpp
 	src/LayerStack.cpp
 	src/ImGui/ImGuiLayer.cpp
 )
 
-set(HEADER_FILES
-	src/Core.h
-    src/Log.h
-    src/Application.h
-	src/Events/Event.h
+#X11 Specific Files
+list(APPEND SOURCE_FILES
+	src/Platform/x11/Input_x11.cpp
+	src/Platform/x11/Window_x11.cpp
+)
+
+#OpenGL Specific Files
+list(APPEND SOURCE_FILES
+	src/Platform/OpenGL/ImGuiRenderer_GL.cpp
 )
 
 add_library(forge ${SOURCE_FILES})
  
 target_include_directories(forge INTERFACE include)
 target_include_directories(forge PUBLIC src) 
+
+target_compile_features(forge PUBLIC cxx_std_17)
 
 # Precompiled header
 target_precompile_headers(forge PUBLIC src/frgpch.h)

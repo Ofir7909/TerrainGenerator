@@ -11,15 +11,13 @@ struct WindowProps
 	unsigned int Width;
 	unsigned int Height;
 
-	WindowProps(const std::string& title = "Forge Engine", unsigned int width = 1270,
-				unsigned int height = 720):
-		Title(title),
-		Width(width), Height(height)
+	WindowProps(const std::string& title = "Forge Engine", unsigned int width = 1270, unsigned int height = 720):
+		Title(title), Width(width), Height(height)
 	{
 	}
 };
 
-//Interface representing a desktop window.
+// Interface representing a desktop window.
 class Window
 {
   public:
@@ -29,6 +27,8 @@ class Window
 
 	virtual void OnUpdate() = 0;
 
+	virtual void* GetNativeWindow() const = 0;
+
 	virtual unsigned int GetWidth() const  = 0;
 	virtual unsigned int GetHeight() const = 0;
 
@@ -36,6 +36,7 @@ class Window
 
 	virtual void SetVsync(bool enabled) = 0;
 	virtual bool IsVsync() const		= 0;
+
 
 	static Window* Create(const WindowProps& props = WindowProps());
 };

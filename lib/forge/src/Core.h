@@ -2,8 +2,6 @@
 
 #include "frgpch.h"
 
-#include <assert.h>
-
 #define FRG_BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 #define FRG_BIT(x) (1 << x)

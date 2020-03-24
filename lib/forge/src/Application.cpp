@@ -1,7 +1,7 @@
 #include "Application.h"
 
 #include "Core.h"
-#include "Log.h"
+#include "Input.h"
 
 #include <GLFW/glfw3.h> //REMOVE THIS
 namespace forge
@@ -25,6 +25,11 @@ void Application::Run()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		for (Layer* layer : m_LayerStack) { layer->OnUpdate(); }
+
+		auto [x, y] = Input::GetMousePosition();
+		// FRG_CORE_TRACE("{0}, {1}", Input::GetMouseX(), Input::GetMouseY());
+		FRG_CORE_TRACE("{0}, {1}", x, y);
+		FRG_CORE_TRACE("A: {0}", Input::IsKeyPressed(GLFW_KEY_A));
 
 		m_Window->OnUpdate();
 	}

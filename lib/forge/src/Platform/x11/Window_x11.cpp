@@ -55,6 +55,7 @@ void Window_x11::Init(const WindowProps& props)
 	FRG_CORE_INFO("Initializing GLAD");
 	int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	FRG_CORE_ASSERT(status, "Failed to initialize GLAD");
+	FRG_CORE_INFO("GLAD initialized successfully");
 
 	glfwSetWindowUserPointer(m_Window, &m_Data);
 	SetVsync(true);

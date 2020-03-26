@@ -27,10 +27,6 @@ void Application::Run()
 
 		for (Layer* layer : m_LayerStack) { layer->OnUpdate(); }
 
-		auto [x, y] = Input::GetMousePosition();
-		FRG_CORE_TRACE("{0}, {1}", x, y);
-		FRG_CORE_TRACE("A: {0}", Input::IsKeyPressed(GLFW_KEY_A));
-
 		m_Window->OnUpdate();
 	}
 }
@@ -42,7 +38,7 @@ void Application::OnEvent(Event& e)
 	// If the event is a WindowCloseEvent Close the window
 	dispatcher.Dispatch<WindowCloseEvent>(FRG_BIND_EVENT_FN(Application::OnWindowClose));
 
-	FRG_CORE_TRACE("{0}", e);
+	// FRG_CORE_TRACE("{0}", e);
 
 	for (auto it = m_LayerStack.end(); it > m_LayerStack.begin();) {
 		it--;

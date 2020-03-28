@@ -17,20 +17,24 @@ class ImGuiLayer : public Layer
 
 	void OnAttach() override;
 	void OnDetach() override;
-	void OnUpdate() override;
-	void OnEvent(Event& event) override;
+	void OnImGuiRender() override;
 
-  private:
-	bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
-	bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
-	bool OnMouseMovedEvent(MouseMovedEvent& e);
-	bool OnMouseScrolledEvent(MouseScrolledEvent& e);
+	void Begin();
+	void End();
+	// void OnUpdate() override;
+	// void OnEvent(Event& event) override;
 
-	bool OnKeyPressedEvent(KeyPressedEvent& e);
-	bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-	bool OnKeyTypedEvent(KeyTypedEvent& e);
+	// private:
+	// bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
+	// bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
+	// bool OnMouseMovedEvent(MouseMovedEvent& e);
+	// bool OnMouseScrolledEvent(MouseScrolledEvent& e);
 
-	bool OnWindowResizedEvent(WindowResizedEvent& e);
+	// bool OnKeyPressedEvent(KeyPressedEvent& e);
+	// bool OnKeyReleasedEvent(KeyReleasedEvent& e);
+	// bool OnKeyTypedEvent(KeyTypedEvent& e);
+
+	// bool OnWindowResizedEvent(WindowResizedEvent& e);
 
   private:
 	float m_Time = 0; // Temp until we have time class

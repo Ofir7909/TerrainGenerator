@@ -1,8 +1,11 @@
 #pragma once
 
 #include "Events/ApplicationEvent.h"
+#include "ImGui/ImGuiLayer.h"
 #include "LayerStack.h"
 #include "Window.h"
+
+#include <glad/glad.h>
 
 namespace forge
 {
@@ -26,6 +29,7 @@ class Application
 	bool OnWindowClose(WindowCloseEvent& e);
 
 	std::unique_ptr<Window> m_Window;
+	ImGuiLayer* m_ImGuiLayer;
 	bool m_Running = true;
 	LayerStack m_LayerStack;
 

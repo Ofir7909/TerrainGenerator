@@ -11,17 +11,13 @@ set(SOURCE_FILES
 	src/Log.cpp
 	src/LayerStack.cpp
 	src/ImGui/ImGuiLayer.cpp
+	src/ImGui/ImGuiBuild.cpp
 )
 
 #X11 Specific Files
 list(APPEND SOURCE_FILES
 	src/Platform/x11/Input_x11.cpp
 	src/Platform/x11/Window_x11.cpp
-)
-
-#OpenGL Specific Files
-list(APPEND SOURCE_FILES
-	src/Platform/OpenGL/ImGuiRenderer_GL.cpp
 )
 
 add_library(forge ${SOURCE_FILES})

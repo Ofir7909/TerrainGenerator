@@ -1,5 +1,7 @@
 #include <forge.h>
 
+#include <ImGui/ImGuiBuild.h>
+
 class ExampleLayer : public forge::Layer
 {
   public:
@@ -13,6 +15,13 @@ class ExampleLayer : public forge::Layer
 	inline void OnEvent(forge::Event& event) override
 	{
 		// FRG_INFO("{0}", event);
+	}
+
+	inline void OnImGuiRender() override
+	{
+		ImGui::Begin("Client defined window");
+		ImGui::Text("Hello world");
+		ImGui::End();
 	}
 };
 
